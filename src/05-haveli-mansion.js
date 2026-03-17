@@ -133,7 +133,6 @@ export class HaveliSecurity {
   }
 
   removeResident(name, passcode) {
-    // Your code here
     if (this.#passcode !== passcode)
       return { success: false, message: "Galat passcode!" };
     const resident = this.#residents.find((resident) => resident.name === name);
@@ -147,7 +146,6 @@ export class HaveliSecurity {
   }
 
   verifyAccess(name) {
-    // Your code here
     const resident = this.#residents.find((resident) => resident.name === name);
     if (!resident) {
       this.#accessLog.push({
@@ -166,7 +164,6 @@ export class HaveliSecurity {
   }
 
   getAccessLog(passcode) {
-    // Your code here
     if (this.#passcode === passcode) {
       return this.#accessLog.slice();
     }
@@ -174,7 +171,6 @@ export class HaveliSecurity {
   }
 
   changePasscode(oldPasscode, newPasscode) {
-    // Your code here
     if (this.#passcode !== oldPasscode)
       return { success: false, message: "Purana passcode galat hai!" };
     if (newPasscode.length < 4) {
@@ -185,18 +181,12 @@ export class HaveliSecurity {
   }
 
   getResidentCount() {
-    // Your code here
     return this.#residents.length;
   }
 
   isResident(name) {
-    // Your code here
     const resident = this.#residents.find((resident) => resident.name === name);
     if (!resident) return false;
     return true;
   }
 }
-
-const haveli = new HaveliSecurity("Sheesh Mahal", "raja1234", 5);
-const result = haveli.addResident("Thakur Sahab", "malik", "raja1234");
-console.log(result);
