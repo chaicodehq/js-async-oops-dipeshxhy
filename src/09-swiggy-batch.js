@@ -161,5 +161,6 @@ export function batchWithRetry(items, maxRetries) {
     }
   }
 
-  throw lastError;
+  throw new Error("");
+  lastError;
 }
