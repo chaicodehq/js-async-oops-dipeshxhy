@@ -98,6 +98,7 @@
  *   );
  *   // => [{ pnr: "PNR...", ...}, { pnr: "PNR...", ...}]
  */
+
 export async function checkSeatAvailability(trainNumber, date, classType) {
   const classTypes = ["SL", "3A", "2A", "1A"];
   if (
@@ -114,7 +115,6 @@ export async function checkSeatAvailability(trainNumber, date, classType) {
     throw new Error("Date required hai!");
   }
   await new Promise((resolve) => setTimeout(resolve, 100));
-
   const seats = Math.floor(Math.random() * 51);
   const available = seats > 0;
   return {
@@ -136,9 +136,10 @@ export async function bookTicket(passenger, trainNumber, date, classType) {
   ) {
     const result = await checkSeatAvailability(trainNumber, date, classType);
     const fares = { SL: 250, "3A": 800, "2A": 1200, "1A": 2000 };
+    const pnr = "PNR" + Math.floor(Math.random() * 1000000);
     if (result.available) {
       return {
-        pnr: "PNR" + Math.floor(Math.random() * 1000000),
+        pnr,
         passenger,
         trainNumber,
         date,
@@ -148,8 +149,11 @@ export async function bookTicket(passenger, trainNumber, date, classType) {
       };
     }
     return {
+      passenger,
+      trainNumber,
+      date,
       status: "waitlisted",
-      waitlistNumber: Math.random() * (20 - 1 + 1) + 1,
+      waitlistNumber: Math.floor(Math.random() * (20 - 1 + 1)) + 1,
     };
   }
   throw new Error("Invalid passenger details");
